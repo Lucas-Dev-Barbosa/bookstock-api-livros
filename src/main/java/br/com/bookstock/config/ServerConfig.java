@@ -18,8 +18,10 @@ public class ServerConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable().authorizeRequests(auth -> auth.antMatchers("/info", "/actuator/**").permitAll())
-				.authorizeRequests(auth -> auth.antMatchers("/livros/**").authenticated()).oauth2ResourceServer().jwt()
+		http.cors().and().csrf().disable()
+				.authorizeRequests(auth -> auth.antMatchers("/info", "/actuator/**").permitAll())
+				.authorizeRequests(auth -> auth.antMatchers(
+						"/livros/**").authenticated()).oauth2ResourceServer().jwt()
 				.jwtAuthenticationConverter(authenticationConverter);
 
 		return http.build();

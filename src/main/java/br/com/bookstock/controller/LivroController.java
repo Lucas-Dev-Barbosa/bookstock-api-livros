@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bookstock.exception.EstoqueException;
-import br.com.bookstock.model.domain.Estoque;
 import br.com.bookstock.model.domain.Livro;
 import br.com.bookstock.model.domain.service.LivroService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -64,10 +63,10 @@ public class LivroController {
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	@Tag(name = "cadastrarLivro", description = "Realiza o cadastramento de um livro no estoque")
-	public Estoque cadastrarLivro(@Valid @RequestBody Livro livro) throws EstoqueException {
-		Estoque estoque = service.salvarLivro(livro);
-		return estoque;
+	@Tag(name = "cadastrarLivro", description = "Realiza o cadastramento de um livro no estoque. Será criado um novo registro na base de estoque")
+	public Livro cadastrarLivro(@Valid @RequestBody Livro livro) throws EstoqueException {
+		Livro newLivro = service.salvarLivro(livro);
+		return newLivro;
 	}
 
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")

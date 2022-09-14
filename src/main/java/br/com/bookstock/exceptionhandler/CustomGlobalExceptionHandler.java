@@ -56,7 +56,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
 	@ExceptionHandler(EstoqueException.class)
 	public ResponseEntity<Object> estoqueException(EstoqueException ex) throws IOException {
-		return getResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+		return getResponseEntity(ex.getStatus(), ex.getMessage());
 	}
 
 	private ResponseEntity<Object> getResponseEntity(HttpStatus httpStatus, String... messages) {
